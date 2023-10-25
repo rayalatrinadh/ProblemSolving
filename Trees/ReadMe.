@@ -1,0 +1,6 @@
+Trees
+Types of Trees
+DFS
+Inorder -> Left Root Right
+PreOrder -> Root Left Right
+PostOrder -> Left Right Root

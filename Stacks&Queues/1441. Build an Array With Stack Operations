@@ -1,0 +1,22 @@
+class Solution {
+
+    public static boolean isExistsCurrentElement(int[] target,int isExistElement){
+        for(int i = 0; i < target.length; i++){
+            if(target[i] == isExistElement)
+              return true;
+        }
+        return false;
+    }
+    public List<String> buildArray(int[] target, int n) {
+       List<String> ans = new ArrayList<>();
+        
+        int lastElement = target[target.length-1];
+        for(int i = 1; i <= lastElement; i++){
+            ans.add("Push");
+            if(!isExistsCurrentElement(target,i)){
+                ans.add("Pop");
+            }
+        }
+        return ans;
+    }
+}

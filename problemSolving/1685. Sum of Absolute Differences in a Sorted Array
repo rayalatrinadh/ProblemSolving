@@ -1,0 +1,36 @@
+//Brute Force
+
+class Solution {
+    public int[] getSumAbsoluteDifferences(int[] nums) {
+         int n = nums.length;
+         int[] ans = new int[n];
+         for(int i = 0; i < n; i++){
+             int absoluteSum = 0;
+             for(int j = 0; j < n; j++){
+                 if(j != i){
+                     absoluteSum += Math.abs(nums[i] - nums[j]);
+                 }
+             }
+
+             ans[i] = absoluteSum;
+
+            
+         }
+         return ans;
+		}
+	}
+
+//Optimization by using mathematical formulae..
+class Solution {
+    public int[] getSumAbsoluteDifferences(int[] nums) {
+           int n = nums.length,leftSum = 0, rightSum = Arrays.stream(nums).sum();
+        int[] res = new int[n];
+
+        for(int i = 0; i < n; ++i){
+            res[i] = i * nums[i] - leftSum + rightSum - (n-i) * nums[i];
+            leftSum += nums[i];
+            rightSum -= nums[i];
+        }
+        return res;
+    }
+}

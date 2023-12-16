@@ -1,0 +1,72 @@
+methodology 1 : 
+by using recursion:
+time Complexity : O(N)
+space Complexity : O(N)
+
+class Solution {
+    List<Integer> ans = new ArrayList<Integer>();
+    public List<Integer> preorderTraversal(TreeNode root) {
+        
+        if(root == null ){
+            return ans;
+        }
+
+        if(root != null && root.left == null && root.right == null)
+        {
+            ans.add(root.val);
+            return ans;
+        }
+
+        preOrder(root);
+        return ans;
+    
+        
+    }
+
+    public void preOrder(TreeNode root){
+          
+          if(root == null)
+          return;
+
+          ans.add(root.val);
+          preOrder(root.left);
+          preOrder(root.right);
+    }
+}
+
+
+methodology 2:
+by using stack data structure:
+time Complexity : O(N)
+space Complexity : O(N) + O(N) = 2O(N) => O(N);
+
+class Solution {
+    public List<Integer> preorderTraversal(TreeNode root) {
+        
+        List<Integer> listAns = new ArrayList<Integer>();
+        Stack<TreeNode> rightNode = new Stack<TreeNode>();
+
+        while(root != null){
+
+            listAns.add(root.val);
+            if(root.right != null)
+            rightNode.push(root.right);
+
+            root = root.left;
+
+            if(root == null && !rightNode.isEmpty()){
+                root = rightNode.peek();
+                rightNode.pop();
+            }
+        }
+
+        return listAns;
+    }
+}
+
+
+
+
+
+
+link : https://medium.com/@3nadhmail/144-binary-tree-preorder-traversal-978815aab58b

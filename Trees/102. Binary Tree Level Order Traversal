@@ -1,0 +1,39 @@
+class Solution {
+    public List<List<Integer>> levelOrder(TreeNode root) {
+       Queue<TreeNode> qu = new LinkedList<TreeNode>();
+       List<List<Integer>> list = new LinkedList<>();
+       List<Integer> tempList = new LinkedList<>();
+
+
+       if(root == null)
+       return list;
+
+       if(root.left == null && root.right == null){
+           tempList.add(root.val);
+           list.add(tempList);
+           return list;
+           
+       }
+         
+
+       qu.offer(root);
+       while(!qu.isEmpty()){
+           int size = qu.size();
+           tempList = new LinkedList<>();
+           for(int i = 0; i<= size-1; i++){
+               TreeNode getQu = qu.poll();
+               tempList.add(getQu.val);
+               if(getQu.left != null)
+               qu.offer(getQu.left);
+
+               if(getQu.right != null)
+               qu.offer(getQu.right);
+           }
+           list.add(tempList);
+       }
+
+       return list;
+    }
+}
+
+link : https://medium.com/@3nadhmail/102-binary-tree-level-order-traversal-3ff92af5a3cc

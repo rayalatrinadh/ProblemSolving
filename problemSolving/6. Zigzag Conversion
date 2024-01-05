@@ -1,0 +1,45 @@
+class Solution {
+    public String convert(String s, int numRows) {
+        int strLngth = s.length();
+        int row = 0, col = 0, currLngth = 0;
+        String m[][] = new String[numRows][numRows*2+1];
+        String ans = "";
+
+        while(currLngth < strLngth){
+            for(row = 0; row < numRows; row++){
+                if(currLngth < strLngth){
+                    char ch = s.charAt(currLngth);
+                    m[row][col] = ch+"";
+                    currLngth++;
+                }else{
+                    break;
+                }
+            }
+           // row = (numRows - row + 1);
+           row = numRows -2;
+            col = col + 1;
+
+            for( ; row > 0; row--){
+                if(currLngth < strLngth){
+                    //m[row][col] = s.charAt(currLngth);
+                    char ch = s.charAt(currLngth);
+                    m[row][col] = ch+"";
+                    currLngth++;
+                    col++;
+                }else{
+                    break;
+                }
+            }
+        }
+System.out.println(Arrays.deepToString(m).replace("], ", "]\n").replace("[[", "[").replace("]]", "]"));
+
+for(int k = 0; k < m.length; k++){
+    for(int l = 0; l < m[k].length; l++){
+          if(m[k][l] != null)
+             ans += m[k][l];
+    }
+
+}
+        return ans;
+    }
+}

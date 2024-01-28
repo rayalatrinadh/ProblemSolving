@@ -1,0 +1,22 @@
+class Solution {
+    public List<Integer> findWordsContaining(String[] words, char x) {
+        int len = words.length;
+        List<Integer> ansList = new ArrayList<>();
+        if(words.length == 0)
+        return ansList;
+
+        for(int i = 0; i < len; i++){
+           
+            for(char j : words[i].toCharArray()){
+                if(j == x){
+                ansList.add(i);
+                break;
+                }
+            }
+            // if(words[i].contains(x+"")){
+            //     ansList.add(i);
+            // }
+        }
+        return ansList;
+    }
+}

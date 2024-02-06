@@ -1,0 +1,31 @@
+package com.trinadh.Strings;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class PowerSet {
+    public static void main(String args[]){
+        List<String> subsequence = new ArrayList<String>();
+        String givenString = "abc";
+        subsequence = getSubsequence(givenString);
+        System.out.println(" list : " + subsequence);
+    }
+    public static List<String> getSubsequence(String givenString){
+        List<String> subsequence = new ArrayList<String>();
+
+        int n =givenString.length();
+        int numPow = (int)Math.pow(2,n); //(1 <<n => 2 pow(n)
+
+        for(int num = 0; num < numPow; num++){
+            String subString = "";
+            for(int i = 0; i < n; i++){
+                if((num & (1 << i)) != 0) {
+                    subString += givenString.charAt(i);
+                }
+        }
+            subsequence.add(subString);
+        }
+        return subsequence;
+    }
+}
+//output : list : [, a, b, ab, c, ac, bc, abc]

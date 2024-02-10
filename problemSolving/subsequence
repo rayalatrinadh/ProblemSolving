@@ -1,0 +1,41 @@
+package com;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Stack;
+
+public class SubsequenceDemo {
+    public static void sequence(int index, Stack<Character> ds, char[] arr,int n){
+        if(index == n)
+        {
+            for(char ele : ds)
+                System.out.print(ele + " ");
+            System.out.println();
+            return;
+        }
+        ds.push(arr[index]);
+        sequence(index+1,ds,arr,n);
+        ds.pop();
+        sequence(index+1,ds,arr,n);
+
+    }
+    public static void main(String args[]){
+        char[] arr = {'a','b','c'};
+        int n = 3;
+        Stack<Character> ds = new Stack<>();
+        sequence(0,ds,arr,n);
+
+    }
+}
+
+//output : 
+# a b c 
+# a b 
+# a c 
+# a 
+# b c 
+# b 
+# c 
+# empty {}
+
+# for every n Pow(2,n) subsequences

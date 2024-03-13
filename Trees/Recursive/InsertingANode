@@ -1,0 +1,67 @@
+package com.trees;
+
+import java.util.Stack;
+
+class TreeNode {
+    int data;
+    TreeNode left;
+    TreeNode right;
+    public TreeNode(int data) {
+        this.data = data;
+        this.left = null;
+        this.right = null;
+    }
+}
+class BinarySearchTree {
+    TreeNode root;
+    public BinarySearchTree() {
+        this.root = null;
+    }
+    // Helper method to insert a node into the BST
+    public void insert(int data) {
+        root = insertRec(root, data);
+    }
+    // Recursive method to insert a node into the BST
+    private TreeNode insertRec(TreeNode root, int data) {
+        if (root == null) {
+            root = new TreeNode(data);
+            return root;
+        }
+        if (data < root.data) {
+            root.left = insertRec(root.left, data);
+        } else if (data > root.data) {
+            root.right = insertRec(root.right, data);
+        }
+        return root;
+    }
+
+    public static void printInOrder(TreeNode root){
+        if(root != null){
+            printInOrder(root.left);
+            System.out.println(root.data + " ");
+            printInOrder(root.right);
+
+        }
+    }
+}
+public class Main {
+    // Helper method to create a sample BST
+    public static BinarySearchTree createBinarySearchTree() {
+        BinarySearchTree bst = new BinarySearchTree();
+        bst.insert(5);
+        bst.insert(3);
+        bst.insert(7);
+        bst.insert(2);
+        bst.insert(4);
+        bst.insert(6);
+        bst.insert(8);
+        return bst;
+    }
+    // Main method to run the example
+    public static void main(String[] args) {
+        BinarySearchTree bst = createBinarySearchTree();
+        System.out.println("Sample Binary Search Tree has been created!");
+        bst.printInOrder(bst.root);
+    }
+}
+

@@ -1,0 +1,62 @@
+package com.trees;
+
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Stack;
+
+class TreeNode{
+    int data;
+    TreeNode left;
+    TreeNode right;
+
+    TreeNode(int data){
+        this.data = data;
+        this.left = null;
+        this.right = null;
+    }
+}
+public class PrintXTrees {
+    public static void main(String args[]){
+        TreeNode root = new TreeNode(1);
+        root.left = new TreeNode(2);
+        root.right = new TreeNode(3);
+        root.left.left = new TreeNode(4);
+        root.left.left.left = new TreeNode(8);
+        root.left.right = new TreeNode(5);
+        root.left.right.left = new TreeNode(15);
+        root.right.left = new TreeNode(6);
+        root.right.right = new TreeNode(7);
+        root.right.left.right = new TreeNode(9);
+        root.right.right.left = new TreeNode(10);
+
+        Stack<TreeNode> st = new Stack<>();
+        List<String> ans = new ArrayList<>();
+        st.push(root);
+
+        while(!st.isEmpty()){
+            TreeNode current = st.pop();
+
+            if(current != null){
+                if(current.right != null){
+                    st.push(current.right);
+                    if(current.left == null)
+                        st.push(null);
+                }
+
+                if(current.left != null){
+
+                    if(current.right  == null)
+                        st.push(null);
+                    st.push(current.left);
+                }
+                ans.add(current.data + "");
+            }
+            else{
+                ans.add("x");
+            }
+        }
+        System.out.println("ans :  ");
+        System.out.println(ans);
+    }
+}

@@ -1,0 +1,27 @@
+//longest subArray bruteforce Algorithm by trinadh
+
+package com.ProblemSolving.April;
+
+public class LongestSubArray {
+    public static void main(String args[]){
+        int[] arr = {1,2,3,1,1,1,1,4,2,3};
+        int k = 9;
+        int s = 0, ln = 0, finalLng = 0;
+
+        for(int i = 0;  i < arr.length; i++){
+            s += arr[i];
+
+            if(s >= k) {
+                ln++;
+                finalLng = finalLng < ln ? ln : finalLng;
+                s = arr[i];
+                ln = 1;
+            }else{
+                ln++;
+            }
+        }
+        System.out.println("ans : "+ finalLng);
+
+    }
+}
+

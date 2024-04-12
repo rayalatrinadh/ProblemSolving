@@ -1,0 +1,30 @@
+public class Solution {
+    public static int longestSubarrayWithSumK(int []nums, long k) {
+        // Write your code here
+
+         Map<Integer,Integer> map = new HashMap<>();
+
+       int sum = 0;
+       int len = 0;
+       int n = nums.length;
+
+       for(int i = 0; i < n; i++){
+
+           sum += nums[i];
+
+           if(sum == k){
+               len = Math.max(len,i+1);
+           } 
+           if(map.containsKey((sum-k))){
+               len = Math.max(i-map.get(sum-k),len);
+           }
+           else{
+               map.put(sum,i);
+           }
+       }
+       System.out.println(" map at end : " + map);
+       return len;
+    }
+}
+
+//https://www.naukri.com/code360/problems/longest-subarray-with-sum-k_5713505?utm_source=youtube&utm_medium=affiliate&utm_campaign=striver_Arrayproblems

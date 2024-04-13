@@ -1,0 +1,32 @@
+class Solution {
+    public String minRemoveToMakeValid(String s) {
+       Stack<String> stk = new Stack();
+       String newAns = "";
+       int sLngth = s.length();
+
+       for(int i = 0; i < sLngth; i++){
+            if(s.charAt(i) == '('){
+                stk.push("(,"+i);
+            }
+            else if(s.charAt(i) == ')' && stk.isEmpty()){
+                stk.push("),"+i);
+            }else if(s.charAt(i) == ')'){
+                if(stk.peek().contains("("))
+                stk.pop();
+                else
+                stk.push("),"+i);
+            }
+       }
+        List<Integer> list = new ArrayList<>();
+        while(!stk.isEmpty()){
+            String peek[] = stk.pop().split(",");
+           list.add(Integer.parseInt(peek[1]));
+        }
+        for(int i = 0; i < sLngth; i++){
+            if(!list.contains(i)){
+                newAns += s.charAt(i);
+            }
+        }
+        return newAns;
+        }
+}

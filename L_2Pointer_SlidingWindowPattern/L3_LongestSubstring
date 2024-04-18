@@ -1,0 +1,14 @@
+Longest substring without repeating characters 
+brute force 
+Tc : O(n2)
+Sc : O(1)
+
+Best 
+by using hash 
+Tc : O(n)
+Sc : O(256)
+
+Optimal 
+by using hash with 2 pointer concept 
+Tc : O(n)
+Sc : O(n)

@@ -1,0 +1,76 @@
+class Solution {
+    public int longestOnes(int[] nums, int k) {
+        int leftPointer = 0, rightPointer = 0, len = nums.length, zeroCount = 0, maxLen = 0;
+
+        while(rightPointer < len){
+
+            if(nums[rightPointer] == 0){
+                zeroCount++;
+            }
+                if(zeroCount > k){
+                    if(nums[leftPointer] == 0)
+                    zeroCount--;
+
+                    leftPointer++;
+                }
+            maxLen = zeroCount <= k ? Math.max(maxLen, (rightPointer - leftPointer + 1)) : maxLen;
+
+            rightPointer++;
+        }
+        return maxLen;
+    }
+
+    /* Optimal Solution
+    Time Complexity : O(N);
+    Space Complexity : O(1);
+    */
+}
+
+/*
+brute Force Algorithm
+
+int maxLen = 0;
+        for(int i = 0; i < nums.length; i++){
+            int zerosCount = 0;
+            int j = i;            
+            while(j < nums.length){
+                if(nums[j] == 0)
+                zerosCount++;
+
+                if(zerosCount > k && nums[j] == 0){
+                 j = nums.length;
+                 continue;
+                }
+                maxLen = Math.max(maxLen, (j-i+1));
+                j++;
+            }
+        }
+        return maxLen;
+
+        Time Complexity : O(n2)
+        Space Complexity : O(1)
+
+*/
+
+/*
+ while(rightPointer < len){
+
+            if(nums[rightPointer] == 0){
+                zeroCount++;
+            }
+                while(leftPointer <= rightPointer && zeroCount > k){
+                    if(nums[leftPointer] == 0)
+                    zeroCount--;
+
+                    leftPointer++;
+                }
+            maxLen = Math.max(maxLen, (rightPointer - leftPointer + 1));
+
+            rightPointer++;
+        }
+        return maxLen;
+
+        Time Complexity : O(2n)
+        Space Complexity : O(1);
+
+*/

@@ -1,0 +1,26 @@
+Brute Force :
+Time Complexity : O(N)
+Space Complexity : O(1)
+
+class Solution {
+    public String reversePrefix(String word, char ch) {
+      int len = word.length();
+      int flag = 0, i = 0;
+      String tempAns = word;
+
+      for( i = 0; i < len; i++){
+        if(word.charAt(i) == ch){
+            flag = 1;
+            break;
+        }
+      }
+
+      if(flag != 0){
+        String temp = word.substring(0,i+1);
+        StringBuilder sb = new StringBuilder(temp);
+        return sb.reverse().toString() + word.substring(i+1);
+      }
+
+      return tempAns;
+    }
+}

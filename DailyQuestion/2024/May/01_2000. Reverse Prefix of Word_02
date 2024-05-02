@@ -1,0 +1,54 @@
+class Solution {
+    public String reversePrefix(String word, char ch) {
+      int len = word.length();
+      int flag = 0, i = 0;
+      String tempAns = word;
+
+    //   for( i = 0; i < len; i++){
+    //     if(word.charAt(i) == ch){
+    //         flag = 1;
+    //         break;
+    //     }
+    //   }
+
+    int firstOccurence = word.indexOf(ch);
+
+      if(firstOccurence != -1){
+        String temp = word.substring(0,firstOccurence+1);
+        StringBuilder sb = new StringBuilder(temp);
+        return sb.reverse().toString() + word.substring(firstOccurence+1);
+      }
+
+      return tempAns;
+    }
+}
+
+-----------------------------
+Two Pointer : 
+class Solution {
+    public String reversePrefix(String word, char ch) {
+    
+    
+    int firstOccurence = word.indexOf(ch);
+
+    if(firstOccurence == -1)
+    return word;
+
+    int startIndex = 0;
+    int lastIndex = firstOccurence;
+    StringBuilder sb = new StringBuilder(word);
+
+    while(startIndex < lastIndex){
+        swap(sb,startIndex,lastIndex);
+        startIndex++;
+        lastIndex--;
+    }
+    return sb.toString();
+    }
+
+    void swap(StringBuilder sb, int startIndex, int endIndex){
+        char temp = sb.charAt(startIndex);
+        sb.replace(startIndex,startIndex+1, ""+sb.charAt(endIndex));
+        sb.replace(endIndex,endIndex+1,""+temp);
+    }
+}

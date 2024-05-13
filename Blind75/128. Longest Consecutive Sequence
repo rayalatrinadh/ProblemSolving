@@ -1,6 +1,12 @@
+//Time Complexity : O(N) [ for array sort O(N) + Iterates the entire array once O(N) => O(N) + O(N) = O(2N) -> O(N)
+//Space Complexity : O(1)
+
+
+
+
 class Solution {
     public int longestConsecutive(int[] nums) {
-        Arrays.sort(nums);
+        Arrays.sort(nums); //--------------------> it take O(N) for sorting the array (inbuilt method)
         int l = 0, r = 1, lcs = 0;
         int length = nums.length;
 

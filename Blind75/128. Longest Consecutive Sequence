@@ -1,0 +1,30 @@
+class Solution {
+    public int longestConsecutive(int[] nums) {
+        Arrays.sort(nums);
+        int l = 0, r = 1, lcs = 0;
+        int length = nums.length;
+
+        if(length < 2)
+        return length;
+
+       int scs = 0;
+        while(r < length){
+            if(nums[r] - nums[l] ==1){
+                l++;
+                r++;
+                scs++;
+            }else if(nums[r] == nums[l]){
+                l++;
+                r++;
+            }else{
+                l++;
+                r++;
+                lcs = Math.max(lcs,scs);
+                scs = 0;
+            }
+
+        }
+        lcs = Math.max(lcs,scs);
+        return lcs+1;
+    }
+}

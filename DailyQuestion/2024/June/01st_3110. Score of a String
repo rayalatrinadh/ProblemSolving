@@ -1,0 +1,19 @@
+/*
+   timeComplexity : O(N);
+   spaceComplexity : O(1);
+*/
+
+class Solution {
+    public int scoreOfString(String s) {
+        int len = s.length();
+
+        if(len < 1)
+        return 0;
+
+        int ans = 0;
+        for(int i = 0; i < len - 1; i++){
+            ans += Math.abs(s.charAt(i) - s.charAt(i+1));
+        }
+        return ans;
+    }
+}

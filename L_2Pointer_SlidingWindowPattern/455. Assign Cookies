@@ -1,0 +1,23 @@
+/*
+Time Complexity : O(N)
+Space Complexity : O(1)
+
+*/
+
+//Brute Force
+class Solution {
+    public int findContentChildren(int[] g, int[] s) {
+        int gp = 0, sp = 0,ans = 0;
+        Arrays.sort(g);
+        Arrays.sort(s);
+        while(gp < g.length && sp < s.length){
+            if(g[gp] <= s[sp]){
+                ans++;sp++;gp++;
+            }
+            else if(g[gp] > s[sp])
+             sp++;
+        }
+        return ans;
+    }
+}
+

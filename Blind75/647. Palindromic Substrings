@@ -1,0 +1,26 @@
+Time Complexity : O(N^3)
+Space Complexity : O(1)
+
+class Solution {
+    public int countSubstrings(String s) {
+        
+        int n = s.length();
+        StringBuilder tempStr;
+        int count = 0;
+
+        for(int k = 0; k < n; k++){
+            tempStr = new StringBuilder();
+            for(int i = k; i < n; i++){
+                for(int j = i; j <= i; j++){
+                   tempStr.append(s.charAt(j)+"");
+                }
+                String origin = tempStr.toString();
+                String rever = new StringBuilder(origin).reverse().toString();
+                if(origin.equals(rever))
+                count++;
+            }
+           
+        }
+        return count;
+    }
+}

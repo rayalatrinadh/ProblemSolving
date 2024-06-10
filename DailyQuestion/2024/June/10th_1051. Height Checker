@@ -1,0 +1,19 @@
+
+
+//array.clone() -> copy our array in order to sort the copy of it, but not the original one.
+
+class Solution {
+    public int heightChecker(int[] heights) {
+        int[] temp = heights.clone();
+        Arrays.sort(heights);
+        int ans = 0;
+        for(int i = 0; i < heights.length; i++){
+            if(temp[i] != heights[i])
+            ans++;
+        }
+        return ans;
+
+    
+
+    }
+}

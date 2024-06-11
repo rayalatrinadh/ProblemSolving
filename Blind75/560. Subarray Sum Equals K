@@ -1,0 +1,79 @@
+//https://medium.com/@3nadhmail/560-subarray-sum-equals-k-b612bd15ddb0
+
+
+//Brute Force
+//Time Complexity : O(N^3)
+//Space Complexity : O(1)
+//partial Answer : Time Limit Exceeded 61 / 93 testcases passed
+
+class Solution{
+    public int subarraySum(int[] nums, int k){
+        int n = nums.length;
+        int ans = 0;
+        for(int i = 0; i < n; i++){
+            for(int j = i; j < n; j++){
+                 int sum = 0;
+                for(int m = i; m <= j; m++){
+                    sum+=nums[m];
+                }
+               if(sum == k)
+                ans++;
+            }          
+        }
+        return ans;
+    }
+}
+
+//---------------------------------------------------------
+
+//Best 
+//Time Complexity : O(N^2)
+//Space Complexity : O(1)
+class Solution {
+    public int subarraySum(int[] nums, int k) {
+       int ans = 0;
+        for(int i = 0; i < nums.length; i++){
+            int sum = 0;
+            for(int j = i; j < nums.length; j++){
+                sum += nums[j];
+                if(sum == k){
+                    ans++;
+                }
+            }
+        }
+        return ans;
+    }
+}
+
+//--------------------
+
+//Optimal
+//Time Complexity : O(N)
+//Space Complexity : O(N)
+class Solution {
+    public int subarraySum(int[] nums, int k) {
+        if(nums.length < 1)
+        return 0;
+
+        Map<Integer,Integer> map = new HashMap<Integer,Integer>();
+        int prefixSum = 0, count = 0;
+        map.put(0,1);
+
+        for(int i = 0; i < nums.length; i++){
+            prefixSum += nums[i];
+        if(map.containsKey(prefixSum-k)){
+            int getPrefixSum = map.get(prefixSum-k);
+            count += getPrefixSum;
+        }
+         if(map.containsKey(prefixSum))
+         {  int getN=map.get(prefixSum);
+           map.put(prefixSum,getN+1);
+        }else{
+            map.put(prefixSum,1);
+        }
+    }
+        return count;
+    }
+}
+
+

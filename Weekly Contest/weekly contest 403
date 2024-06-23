@@ -1,0 +1,99 @@
+problem 01 : 
+status : solved
+
+3194. Minimum Average of Smallest and Largest Elements
+
+Approach : 01
+
+class Solution {
+    public double minimumAverage(int[] nums) {
+        int n = nums.length;
+        
+        double[] avg = new double[n/2];
+            
+        Arrays.sort(nums);
+        int slowPointer = 0, fastPointer = n -1,avgIndexCount = 0;
+        DecimalFormat df = new DecimalFormat("#.0");
+        
+        while(slowPointer < fastPointer){
+            double getAvg = (double)(nums[slowPointer] + nums[fastPointer])/2;
+            String formattedValue = df.format(getAvg);
+            double formattedValFinal = 0.0;
+            try{
+           formattedValFinal =  df.parse(formattedValue).doubleValue();
+                //System.out.println("formatted Val : " + formattedValFinal);
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+            avg[avgIndexCount++] = formattedValFinal;
+            slowPointer++;
+            fastPointer--;            
+        }
+        
+        Arrays.sort(avg);
+        return avg[0];
+    }
+}
+
+Approach 02
+  
+class Solution {
+    public double minimumAverage(int[] nums) {
+        int n = nums.length;
+        double[] avg = new double[n/2];
+        Arrays.sort(nums);
+        int slowPointer = 0, fastPointer = n -1,avgIndexCount = 0;
+        while(slowPointer < fastPointer){
+            double getAvg = (double)(nums[slowPointer] + nums[fastPointer])/2.0;
+            avg[avgIndexCount++] = getAvg;
+            slowPointer++;
+            fastPointer--;            
+        }
+        
+        Arrays.sort(avg);
+        return avg[0];
+    }
+}
+
+NOTE : 
+      Approach 01 -> taken 30 seconds approx to execute the algorithm
+      Approach 02 -> tached 03 seconds approx to execute the algorithm
+
+---------------------------------------------------------------------------------------------------------------------------
+
+Problem 02 :
+3195. Find the Minimum Area to Cover All Ones I
+
+
+--------------------------------------------------------------------------------------------------------------------------------
+
+
+Problem 03 : 
+3196. Maximize Total Cost of Alternating Subarrays
+
+
+-----------------------------------------------------------------------------------------------------------------------------
+
+Problem 04:
+3197. Find the Minimum Area to Cover All Ones II
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

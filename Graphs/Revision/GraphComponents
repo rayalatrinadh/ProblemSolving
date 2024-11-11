@@ -1,0 +1,75 @@
+package com.DataStructuresPreperation;
+
+import java.util.*;
+
+class Solution{
+
+    public int findNumberOfComponents(int E, int V, List<List<Integer>> edges){
+
+        //To Store Adjacency List
+        List<Integer>[] adjList = new ArrayList[V];
+        for(int i = 0; i < V; i++){
+            adjList[i] = new ArrayList<>();
+        }
+
+        //Add edges to adjacency list
+        for(int i = 0; i < E; i++){
+            adjList[edges.get(i).get(0)].add(edges.get(i).get(1));
+            adjList[edges.get(i).get(1)].add(edges.get(i).get(0)); //undirected
+        }
+
+        //Visited array
+        boolean[] vis = new boolean[V];
+
+        int count = 0;
+
+        //Start Traversal
+
+        for(int i = 0; i < V; ++i){
+
+            if(!vis[i]){
+                count++;
+
+                bfs(i, adjList, vis);
+            }
+        }
+        return count;
+    }
+
+    public void bfs(int node, List<Integer>[] adjList, boolean[] vis){
+        vis[node] = true;
+
+        Queue<Integer> q = new LinkedList<>();
+
+        q.add(node);
+
+        while(!q.isEmpty()){
+            int getNode = q.poll();
+
+            for(int adjNodes: adjList[getNode]){
+                if(!vis[adjNodes]){
+                    vis[adjNodes] = true;
+                    q.add(adjNodes);
+                }
+            }
+        }
+
+    }
+
+}
+
+public class ConnectedComponentsGraphs {
+
+    public static void main(String args[]){
+        int V = 4, E = 2;
+        List<List<Integer>> edges = Arrays.asList(
+                Arrays.asList(0,1),
+                Arrays.asList(1,2)
+        );
+
+        Solution sl = new Solution();
+
+        int ans = sl.findNumberOfComponents(E,V,edges);
+        System.out.println("The number of components in the given graph is : " + ans);
+    }
+}

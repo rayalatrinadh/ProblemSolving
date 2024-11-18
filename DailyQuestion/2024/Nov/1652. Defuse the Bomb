@@ -51,3 +51,9 @@ class Solution {
         return ans;
     }
 }
+
+
+/* Time Complexity: O(N^2)
+   Space Complexity: O(N) // ans array to store all the answer elements
+
+*/

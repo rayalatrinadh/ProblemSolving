@@ -1,0 +1,67 @@
+//Brute Force Algorithm:
+
+class Solution {
+    public int findCircleNum(int[][] isConnected) {
+
+        int n = isConnected.length;
+        int m = isConnected[0].length;
+
+        List<Integer>[] adjacent = new ArrayList[n];
+        
+        for(int i = 0; i < n; i++){
+            adjacent[i] = new ArrayList<>();
+        }
+
+        for(int i = 0; i < n; i++){
+            for(int j = 0; j < m; j++){
+                if(i != j && isConnected[i][j] == 1)
+                adjacent[i].add(j);
+            }
+        }
+        int count = 0;
+        boolean[] visitedCities = new boolean[n];
+        for(int i = 0; i < n; i++){
+            if(!visitedCities[i])
+            ++count;
+            traverse(i,adjacent,visitedCities);
+        }
+        return count;
+    }
+
+    public void traverse(int city,List<Integer>[] adjacent, boolean[] visitedCities){
+        visitedCities[city] = true;
+
+        for(int adjacentCities : adjacent[city]){
+            if(!visitedCities[adjacentCities])
+            traverse(adjacentCities,adjacent,visitedCities);
+        }
+    }
+
+}
+
+
+//Optimal Solution
+
+class Solution {
+    public int findCircleNum(int[][] isConnected) {
+        boolean[] visited = new boolean[isConnected.length];
+        int count = 0;
+
+        for(int i = 0; i < isConnected.length; i++){
+            if(!visited[i]){
+                ++count;
+                traverse(i,isConnected,visited);
+            }
+        }
+        return count;
+    }
+    private void traverse(int city, int[][] isConnected, boolean[] visited){
+        visited[city] = true;
+
+        for(int j = 0; j < isConnected[city].length; j++){
+            if(!visited[j]  && isConnected[city][j] == 1)
+            traverse(j,isConnected,visited);
+        }
+    }
+}
+

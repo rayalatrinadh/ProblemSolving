@@ -1,0 +1,82 @@
+//Brute Force Algorithm
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Parse{
+    TreeNode root = null;
+    int level  = 0;
+    Parse(TreeNode root, int level){
+        this.root = root;
+        this.level = level; 
+    }
+
+}
+class Solution {
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        
+        if(root == null) return new ArrayList<>();
+
+        List<List<Integer>> ans = new ArrayList<>();
+
+        Map<Integer,List<Integer>> map = new HashMap<>();
+
+        Queue<Parse> queue = new LinkedList<>();
+
+        queue.add(new Parse(root,0));
+
+        while(!queue.isEmpty()){
+            Parse getNode = queue.poll();
+            TreeNode node = getNode.root;
+            int val = getNode.level;
+
+            if(map.containsKey(val)){
+                List<Integer> getList = map.get(val);
+                getList.add(node.val);
+                map.put(val,getList);
+            }else{
+                    List<Integer> newList = new ArrayList<>();
+                    newList.add(node.val);
+                    map.put(val,newList);
+            }
+             if(node.left != null)
+            queue.add(new Parse(node.left,val+1));
+
+             if(node.right != null)
+             queue.add(new Parse(node.right,val+1));
+        }
+
+    if(map == null)
+    return new ArrayList<>();
+
+        return new ArrayList<List<Integer>>(map.values());
+        
+    }
+}
+
+/*
+Time Complexity:
+- Traversing the tree involves visiting each node exactly once.
+- If there are \( N \) nodes in the binary tree, the time complexity is **\( O(N) \)**.
+
+Space Complexity:
+1. **Queue:** The queue can hold up to \( O(W) \), where \( W \) is the maximum width of the tree. In the worst case (a complete binary tree), \( W \approx N/2 \), so it is \( O(N) \).
+2. **Map Storage:** Storing the list of values at each level in the `map` requires \( O(N) \), as every node's value is stored once.
+
+Thus, the overall space complexity is **\( O(N) \)**.
+
+*/
+
+

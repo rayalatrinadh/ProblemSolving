@@ -1,0 +1,50 @@
+package com.BipartiteGraph;
+
+import java.util.*;
+
+public class Bipartite {
+    public boolean CheckBipartite(int V, List<Integer>[] adj){
+        int[] color = new int[V];
+
+        for(int i = 0; i < V; i++) color[i] = -1;
+
+
+        Queue<Integer> queue = new LinkedList<>();
+        queue.add(0);
+        color[0] = 0;
+        while(!queue.isEmpty()){
+            int parent = queue.poll();
+
+            for(int adjacent : adj[parent]){
+                if(color[adjacent] == -1){
+                    if(color[parent] == 1)
+                        color[adjacent] = 0;
+                    else if(color[parent] == 0)
+                        color[adjacent] = 1;
+
+                    queue.add(adjacent);
+                } else if(color[adjacent] == color[parent]) return false;
+
+            }
+        }
+
+        return true;
+    }
+    public static void main(String args[]){
+        System.out.println("hello");
+        int V = 4;
+        List<Integer>[] adj = new List[V];
+        for (int i = 0; i < V; i++) {
+            adj[i] = new ArrayList<>();
+        }
+        adj[0].addAll(Arrays.asList(1, 3));
+        adj[1].addAll(Arrays.asList(0, 2));
+        adj[2].addAll(Arrays.asList(1, 3));
+        adj[3].addAll(Arrays.asList(0, 2));
+
+        Bipartite sol = new Bipartite();
+        if(sol.CheckBipartite(V,adj))
+            System.out.println("yes it is...!");
+        else System.out.println("not");
+    }
+}

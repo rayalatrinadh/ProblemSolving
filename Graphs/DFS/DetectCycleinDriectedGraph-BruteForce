@@ -1,0 +1,57 @@
+package com;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class DetectACycleinDirectGraph {
+
+    public static void main(String args[]){
+        int V = 4;
+
+        List<Integer>[] adj = new List[V];
+
+        for(int i = 0; i < V; i++){
+            adj[i] = new ArrayList<>();
+        }
+
+        adj[0].add(1); adj[0].add(2);
+        adj[1].add(2);
+        adj[3].add(0); adj[3].add(2);
+        //adj[4].add(1);
+
+        DetectACycleinDirectGraph sol = new DetectACycleinDirectGraph();
+        boolean ans = sol.isCyclic(V, adj);
+        System.out.println("ans : " + ans);
+    }
+    private boolean dfs(int node,  List<Integer>[] adj, boolean[] visited, boolean[] pathVisited){
+        visited[node] = true;
+        pathVisited[node] = true;
+        for(int adjacent : adj[node]){
+            if(!visited[adjacent]) {
+                 boolean ta =  dfs(adjacent,adj,visited,pathVisited);
+                 if(pathVisited[adjacent]) pathVisited[adjacent] = false;
+                 if(pathVisited[node]) pathVisited[node] = false;
+                 return ta;
+            }
+             if(visited[adjacent] && pathVisited[adjacent]){
+                pathVisited[node] = false;
+                return true;
+            }
+        }
+        if(pathVisited[node]) pathVisited[node] = false;
+
+        return false;
+    }
+    public boolean isCyclic(int N, List<Integer>[] adj) {
+
+        boolean[] visited = new boolean[N];
+        boolean[] pathVisited = new boolean[N];
+
+        for(int i = 0; i < N; i++){
+            if(!visited[i]){
+                if(dfs(i,adj,visited,pathVisited)) return true;
+            }
+        }
+        return false;
+    }
+}

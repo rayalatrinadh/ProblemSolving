@@ -1,0 +1,30 @@
+
+//brute Force with inbuilt function (Arrays.sort())
+class Solution {
+    public int longestConsecutive(int[] nums) {
+         Arrays.sort(nums);
+
+        if(nums.length < 1)return 0;
+
+        int count = 1, maxLen = 0;
+
+        for(int present = 1; present < nums.length; present++){
+            if(nums[present] - nums[present-1] == 1 || nums[present] - nums[present-1] == -1){
+                ++count;
+            }else if(nums[present] == nums[present-1]){
+                continue;
+            }else{
+                maxLen = Math.max(maxLen,count);
+                count = 1;
+            }
+        }
+
+        maxLen = Math.max(maxLen, count);
+
+        return maxLen;
+    }
+}
+
+
+
+//brute force with linear search 

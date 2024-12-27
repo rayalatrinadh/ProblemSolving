@@ -1,0 +1,49 @@
+class Solution {
+    public int findCircleNum(int[][] adj) {
+         int V = adj.length;
+         List<Integer>[] adjacentList = new ArrayList[V];
+
+        for(int i = 0; i < adj.length; i++){
+            adjacentList[i] = new ArrayList<>();
+        }
+
+        for(int i = 0; i < adj.length; i++){
+            for(int j = 0; j < adj[i].length; j++){
+                if(adj[i][j] == 1) {adjacentList[i].add(j);}
+            }
+        }
+        int count = 0;
+
+        boolean[] visited = new boolean[V];
+
+        for(int i = 0; i < V; i++){
+            if(!visited[i]){
+                ++count;
+                bfs(i,visited,adjacentList);
+            }
+        }
+
+
+        
+        return count;
+    }
+
+    private static void bfs(int node, boolean[] visited, List<Integer>[] adjacentList){
+        visited[node] = true;
+
+        Queue<Integer> queue = new LinkedList<>();
+
+        queue.add(node);
+
+        while(!queue.isEmpty()){
+            int getNode = queue.poll();
+
+            for(int getAdj : adjacentList[getNode]){
+                if(!visited[getAdj]){
+                    visited[getAdj] = true;
+                    queue.add(getAdj);
+                }
+            }
+        }
+    }
+}

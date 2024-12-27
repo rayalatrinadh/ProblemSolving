@@ -1,0 +1,31 @@
+class Solution {
+    public ListNode mergeInBetween(ListNode list1, int a, int b, ListNode list2) {
+        
+        if(list1 == null) return list2;
+
+        if(list2 == null) return list1;
+
+        int count = 0;
+
+        ListNode temp = list1, temp1 = null, temp2 = null, temp3 = list2;
+
+        while(temp != null){
+            if(count == a - 1) temp1 = temp;
+
+            if(count == b) temp2 = temp;
+
+            temp = temp.next;
+            count += 1;
+        }
+
+        while(temp3 != null && temp3.next != null){
+            temp3 = temp3.next;
+        }
+
+        //System.out.println("temp2: " + temp2.val);
+        if(temp1 != null) temp1.next = list2;
+        if(temp3 != null) temp3.next = temp2.next;
+
+        return list1;
+    }
+}

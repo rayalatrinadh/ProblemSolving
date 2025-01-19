@@ -1,0 +1,34 @@
+//Brute Force Algorithm
+
+class Solution {
+    public List<List<Integer>> threeSum(int[] nums) {
+        
+        int n = nums.length;
+        Set<List<Integer>> set = new HashSet<>();
+
+        for(int i = 0; i < n - 2; i++){
+            for(int j = i + 1; j < n - 1; j++){
+                for(int k = i + 2; k < n; k++){
+                    if(i != j && j != k && i != k && nums[i] + nums[j] + nums[k] == 0){
+                        List<Integer> temp = new ArrayList<>();
+                        temp.addAll(Arrays.asList(nums[i],nums[j],nums[k]));
+                        Collections.sort(temp);
+                        set.add(temp);
+                    }
+                }
+            }
+        }
+        List<List<Integer>> ans = new ArrayList<>();
+
+
+            return new ArrayList<>(set);
+    }
+}
+
+Time Complexity : O(N^-3)
+Space Complexity : O(2N)
+
+-------------------------------------------------------------
+
+//Better Algorithm using Set to track the 3rd element to equals target(0)
+

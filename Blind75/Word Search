@@ -1,0 +1,42 @@
+class Solution {
+    public boolean exist(char[][] board, String word) {
+        
+        int n = board.length;
+        int m = board[0].length;
+
+        for(int i = 0; i < n; i++){
+            for(int j = 0; j < m; j++){
+                if(board[i][j] == word.charAt(0)){
+                    if(traverse(board,word,0,i,j))return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public static boolean traverse(char[][] board, String word, int index,int r, int c){
+
+
+        int n = board.length;
+        int m = board[0].length;
+        
+        //base
+        if(index == word.length()) return true;
+
+        if(r < 0 || r >= n || c <0 || c >= m || board[r][c] == ' ' || board[r][c] != word.charAt(index)) return false;
+
+        char temp = board[r][c];
+        board[r][c] = ' ';
+
+        boolean ans = traverse(board,word,index + 1, r+1, c) ||
+        traverse(board,word,index +1, r-1,c) ||
+        traverse(board,word,index+1, r, c+1) ||
+        traverse(board,word, index+1, r, c-1);
+
+        board[r][c] = temp;
+
+        return ans;
+
+
+    }
+}

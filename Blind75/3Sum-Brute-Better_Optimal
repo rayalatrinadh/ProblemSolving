@@ -32,3 +32,38 @@ Space Complexity : O(2N)
 
 //Better Algorithm using Set to track the 3rd element to equals target(0)
 
+class Solution {
+    public List<List<Integer>> threeSum(int[] nums) {
+        
+        int n = nums.length;
+        Set<List<Integer>> setAns = new HashSet<>();
+        
+        int target = 0;
+
+        for(int i = 0; i < n; i++){
+            Set<Integer> set = new HashSet<>();
+            for(int j = i+1; j < n; j++){
+                
+                if(i != j && set.contains(target - (nums[i]+ nums[j]))){
+                    List<Integer> temp = new ArrayList<>();
+                    temp.add(nums[i]);
+                    temp.add(nums[j]);
+                    temp.add(target - (nums[i] + nums[j]));
+                    Collections.sort(temp);
+                    setAns.add(temp);
+                    
+                }
+               set.add(nums[j]);
+                
+            }
+        }
+        return new ArrayList<>(setAns);
+    }
+}
+
+
+------------------------------------------------------------------------------------------
+
+//Optimal Solution
+
+

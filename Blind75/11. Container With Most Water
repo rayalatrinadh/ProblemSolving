@@ -1,0 +1,23 @@
+//brute force
+
+class Solution {
+    public int maxArea(int[] height) {
+        
+        int n = height.length;
+        if(n < 1) return 0;
+
+        int max = 0;
+
+        for(int i = 0; i < n - 1; i++){
+            for(int j = i + 1; j < n; j++){
+                int currentStorage = Math.min(height[i],height[j]) * (j - i);
+
+                if(currentStorage > max) max = currentStorage;
+            }
+        }
+        return max;
+    }
+}
+
+---------------------------------------
+

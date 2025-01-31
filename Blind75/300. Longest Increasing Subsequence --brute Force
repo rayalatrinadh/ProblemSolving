@@ -1,0 +1,37 @@
+class Solution {
+     public static int maxAns = 1;
+    public  int lengthOfLIS(int[] nums) {
+        maxAns = 1;
+        int n = nums.length;
+
+        if(n < 1) return 0;
+        List<Integer> list = new ArrayList();
+
+          findLIS(0,nums, list);
+         return maxAns;
+    }
+
+    private static void findLIS(int index, int[] nums, List<Integer> list){
+
+        if(index >= nums.length){
+            int tempAns = checkLIS(list);
+            if(maxAns < tempAns) maxAns = tempAns;
+            return;
+        }
+        list.add(nums[index]);
+        findLIS(index+1, nums, list);
+        list.remove(list.size()-1);
+        findLIS(index+1,nums,list);
+    }
+
+    private static int checkLIS(List<Integer> list){\
+        int n = list.size();
+        if(n < 1) return 0;
+
+       for(int i = 1; i < n; i++){
+        if(list.get(i) <= list.get(i-1)) return 1;
+       }
+
+        return n;
+    }
+}

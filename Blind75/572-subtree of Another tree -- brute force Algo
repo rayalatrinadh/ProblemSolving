@@ -1,0 +1,65 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public boolean isSubtree(TreeNode root, TreeNode subRoot) {
+
+        //base cases
+
+        if(root == null && subRoot == null) return true;
+
+        if((subRoot == null || root == null) && root != subRoot) return false;
+
+        Stack<TreeNode> stack = new Stack();
+        stack.push(root);
+
+        while(!stack.isEmpty()){
+
+            TreeNode getRoot = stack.pop();
+            root= getRoot;
+
+            if(getRoot != null  && getRoot.val != subRoot.val ){
+
+            if(getRoot.right != null){
+                stack.push(getRoot.right);
+            }
+
+            if(getRoot.left != null){
+                stack.push(getRoot.left);
+            }
+            }else{
+                break;
+            }
+
+        }
+
+        if(root == null || root.val != subRoot.val) return false;
+
+        return checkIsSimilar(root,subRoot);
+    }
+
+    private boolean checkIsSimilar(TreeNode root, TreeNode subRoot){
+        if(root == null && subRoot == null) return true;
+
+        if(root == null && subRoot != null) return false;
+
+        if(root != null && subRoot == null) return false;
+
+        boolean left = checkIsSimilar(root.left, subRoot.left);
+        boolean right = checkIsSimilar(root.right, subRoot.right);
+
+        return left & right;
+    }
+}

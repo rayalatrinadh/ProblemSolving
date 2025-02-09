@@ -1,0 +1,27 @@
+class Solution {
+    public boolean wordBreak(String s, List<String> wordDict) {
+        
+        int n = s.length();
+
+        if(n < 1) return false;
+
+        Set<String> set = wordDict.stream().collect(Collectors.toSet());
+        
+        int start = 0, end = 0;
+        String formWord = "";
+
+        while(end < n){
+            formWord += s.charAt(end);
+
+            if(set.contains(formWord)){
+                System.out.println("internal Start : " + start + " end : " + end);
+                start = end + 1;
+                formWord = "";
+            }
+            ++end;
+        }
+        if(start != end) return false;
+
+        return true;
+    }
+}

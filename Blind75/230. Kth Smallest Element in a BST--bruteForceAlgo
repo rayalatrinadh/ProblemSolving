@@ -1,0 +1,44 @@
+//Brute Force
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public int kthSmallest(TreeNode root, int k) {
+        TreeSet<Integer> treeSet = new TreeSet();
+
+        findKth(root,treeSet);
+        System.out.println(treeSet);
+        Iterator<Integer> itr= treeSet.iterator();
+        int counter = 1;
+        int getEle = 0;
+        
+        while(itr.hasNext() && counter <= k){
+            getEle = itr.next();
+            if(counter == k){
+                return getEle;
+            }
+            counter +=1;
+        }
+        return -1;
+    }
+    private static void findKth(TreeNode root, TreeSet<Integer> set){
+        if(root == null) return;
+
+        set.add(root.val);
+        findKth(root.left,set);
+        findKth(root.right,set);
+    }
+}

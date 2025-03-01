@@ -1,0 +1,25 @@
+class Solution {
+    public boolean isPalindrome(int x) {
+        
+        if(x < 0) return false;
+
+       int reverseN = 0, tx = x;
+
+       while(tx > 0){
+        
+        if(reverseN == 0) {reverseN = tx % 10;}
+        else {
+            reverseN *= 10;
+            reverseN += tx % 10;
+        }
+
+        tx /= 10;
+       }
+
+       if(x != reverseN) return false;
+
+       return true;
+
+
+    }
+}

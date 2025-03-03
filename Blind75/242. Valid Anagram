@@ -1,0 +1,24 @@
+class Solution {
+    public boolean isAnagram(String s, String t) {
+        if(s == null && t == null) return true;
+
+        else if(s == null && t != null) return false;
+        
+        if(t.length() != s.length()) return false;
+
+        int[] hashing = new int[26];
+
+        for(char sc : s.toCharArray())
+          hashing[sc-'a']++;
+
+          for(char tc : t.toCharArray())
+          hashing[tc-'a']--;
+
+//System.out.println(Arrays.toString(hashing));
+       for(int val : hashing){
+        if(val != 0) return false;
+       }
+        
+        return true;
+    }
+}
